@@ -1,9 +1,14 @@
 // ==UserScript==
 // ==/UserScript==
 
+
 var parseXml = function(xmlStr){
   return(new window.DOMParser() ).parseFromString(xmlStr, "text/xml");
 }
+
+dictDiv = document.createElement('div');
+dictDiv.className = 'ZM-augmented-div';
+document.getElementsByTagName('body')[0].appendChild(dictDiv);
 
 function displayDefinition(text){
   apikey = "ukxldjne16v5lt0vro3ncmjnlwzs8td3eborub6vi1"
@@ -15,7 +20,8 @@ function displayDefinition(text){
         onload:     function (response) {
           text = parseXml(response.responseText);
           def = text.getElementsByTagName("def")[0].childNodes[0].data;
-          alert(def);
+          div = document.getElementsByClassName('ZM-augmented-div')[0];
+          div.innerHTML = def;
         }
   } );
 }
@@ -26,3 +32,12 @@ window.onmouseup = function(){
     displayDefinition(window.getSelection())
   }
 }
+
+head = document.getElementsByTagName('head')[0];
+link = document.createElement('link');
+link.id = 'zm-augment-css';
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = 'http://static.zmbush.com/augment/styles.css';
+link.media = 'all';
+head.appendChild(link);
