@@ -26,7 +26,6 @@ function displayDefinition(text){
         method:     "GET",
         url:        url + text,
         onload:     function (response) {
-          hideDiv(currentDef);
 
           responseXml = parseXml(response.responseText);
           definitions = responseXml.getElementsByTagName("def");
@@ -39,15 +38,16 @@ function displayDefinition(text){
             body += (i+1) + ") " + definitions[i].childNodes[0].data;
           }
           if(display){
+            hideDiv(currentDef);
             div = document.getElementById('ZM-augmented-div');
             div.innerHTML = body;
 
             style = document.getElementById('zm-styles');
             style.innerHTML = popupstyles;
-          }
-          currentDef += 1;
+            currentDef += 1;
 
-          setTimeout(hideDiv, 10000, [currentDef]);
+            setTimeout(hideDiv, 10000, [currentDef]);
+          }
         }
   } );
 }
