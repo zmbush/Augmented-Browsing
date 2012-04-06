@@ -7,7 +7,7 @@ var parseXml = function(xmlStr){
 }
 
 dictDiv = document.createElement('div');
-dictDiv.className = 'ZM-augmented-div';
+dictDiv.id = 'ZM-augmented-div';
 document.getElementsByTagName('body')[0].appendChild(dictDiv);
 
 function displayDefinition(text){
@@ -33,11 +33,14 @@ window.onmouseup = function(){
   }
 }
 
-head = document.getElementsByTagName('head')[0];
-link = document.createElement('link');
-link.id = 'zm-augment-css';
-link.rel = 'stylesheet';
-link.type = 'text/css';
-link.href = 'http://static.zmbush.com/augment/styles.css';
-link.media = 'all';
-head.appendChild(link);
+GM_xmlhttpRequest({
+  method: "GET",
+  url: 'http://static.zmbush.com/augment/styles.css',
+  onload: function(response){
+    head = document.getElementsByTagName('head')[0];
+    link = document.createElement('style');
+    link.type = 'text/css';
+    link.innerHTML = response.responseText;
+    head.appendChild(link);
+  }
+});
