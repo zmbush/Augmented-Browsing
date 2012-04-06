@@ -29,16 +29,25 @@ function displayDefinition(text){
           hideDiv(currentDef);
 
           text = parseXml(response.responseText);
-          def = text.getElementsByTagName("def")[0].childNodes[0].data;
-          div = document.getElementById('ZM-augmented-div');
-          div.innerHTML = def;
+          definitions = text.getElementsByTagName("def");
+          text = "";
+          display = false;
+          for(i = 0; i < definitions.length; i++){
+            display = true;
+            if(text != "")
+              text += "<br />";
+            text += (i+1) + ") " + definitions[i].childNodes[0].data;
+          }
+          if(display){
+            div = document.getElementById('ZM-augmented-div');
+            div.innerHTML = text;
 
-          style = document.getElementById('zm-styles');
-          style.innerHTML = popupstyles;
-
+            style = document.getElementById('zm-styles');
+            style.innerHTML = popupstyles;
+          }
           currentDef += 1;
 
-          setTimeout(hideDiv, 3000, [currentDef]);
+          setTimeout(hideDiv, 10000, [currentDef]);
         }
   } );
 }
