@@ -10,6 +10,12 @@ dictDiv = document.createElement('div');
 dictDiv.id = 'ZM-augmented-div';
 document.getElementsByTagName('body')[0].appendChild(dictDiv);
 
+head = document.getElementsByTagName('head')[0];
+link = document.createElement('style');
+link.type = 'text/css';
+link.id = "zm-styles";
+head.appendChild(link);
+
 function displayDefinition(text){
   apikey = "ukxldjne16v5lt0vro3ncmjnlwzs8td3eborub6vi1"
   url = "http://api-pub.dictionary.com/v001?vid=" + apikey + "&type=define&q="
@@ -18,14 +24,26 @@ function displayDefinition(text){
         method:     "GET",
         url:        url + text,
         onload:     function (response) {
+          style = document.getElementById('zm-styles');
+          style.innerHTML = popupstyles;
+
           text = parseXml(response.responseText);
           def = text.getElementsByTagName("def")[0].childNodes[0].data;
-          div = document.getElementsByClassName('ZM-augmented-div')[0];
+          div = document.getElementById('ZM-augmented-div');
           div.innerHTML = def;
+
+          setTimeout(hideDiv, 10000);
         }
   } );
 }
 
+function hideDiv(){
+  div = document.getElementById('ZM-augmented-div');
+  div.innerHTML = '';
+
+  style = document.getElementById('zm-styles');
+  style.innerHTML = '';
+}
 
 window.onmouseup = function(){
   if(window.getSelection() != ""){
@@ -33,14 +51,11 @@ window.onmouseup = function(){
   }
 }
 
+popupstyles = ""
 GM_xmlhttpRequest({
   method: "GET",
   url: 'http://static.zmbush.com/augment/styles.css',
   onload: function(response){
-    head = document.getElementsByTagName('head')[0];
-    link = document.createElement('style');
-    link.type = 'text/css';
-    link.innerHTML = response.responseText;
-    head.appendChild(link);
+    popupstyles = response.responseText;
   }
 });
