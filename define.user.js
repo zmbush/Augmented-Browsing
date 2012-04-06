@@ -16,6 +16,8 @@ link.type = 'text/css';
 link.id = "zm-styles";
 head.appendChild(link);
 
+currentDef = 0;
+
 function displayDefinition(text){
   apikey = "ukxldjne16v5lt0vro3ncmjnlwzs8td3eborub6vi1"
   url = "http://api-pub.dictionary.com/v001?vid=" + apikey + "&type=define&q="
@@ -24,25 +26,31 @@ function displayDefinition(text){
         method:     "GET",
         url:        url + text,
         onload:     function (response) {
-          style = document.getElementById('zm-styles');
-          style.innerHTML = popupstyles;
+          hideDiv(currentDef);
 
           text = parseXml(response.responseText);
           def = text.getElementsByTagName("def")[0].childNodes[0].data;
           div = document.getElementById('ZM-augmented-div');
           div.innerHTML = def;
 
-          setTimeout(hideDiv, 10000);
+          style = document.getElementById('zm-styles');
+          style.innerHTML = popupstyles;
+
+          currentDef += 1;
+
+          setTimeout(hideDiv, 3000, [currentDef]);
         }
   } );
 }
 
-function hideDiv(){
-  div = document.getElementById('ZM-augmented-div');
-  div.innerHTML = '';
+function hideDiv(def){
+  if(def == currentDef){
+    div = document.getElementById('ZM-augmented-div');
+    div.innerHTML = '';
 
-  style = document.getElementById('zm-styles');
-  style.innerHTML = '';
+    style = document.getElementById('zm-styles');
+    style.innerHTML = '';
+  }
 }
 
 window.onmouseup = function(){
