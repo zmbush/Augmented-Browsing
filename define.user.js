@@ -28,19 +28,19 @@ function displayDefinition(text){
         onload:     function (response) {
           hideDiv(currentDef);
 
-          text = parseXml(response.responseText);
-          definitions = text.getElementsByTagName("def");
-          text = "";
+          responseXml = parseXml(response.responseText);
+          definitions = responseXml.getElementsByTagName("def");
+          body = "<b>" + text + "</b><br />";
           display = false;
           for(i = 0; i < definitions.length; i++){
             display = true;
-            if(text != "")
-              text += "<br />";
-            text += (i+1) + ") " + definitions[i].childNodes[0].data;
+            if(body != "")
+              body += "<br />";
+            body += (i+1) + ") " + definitions[i].childNodes[0].data;
           }
           if(display){
             div = document.getElementById('ZM-augmented-div');
-            div.innerHTML = text;
+            div.innerHTML = body;
 
             style = document.getElementById('zm-styles');
             style.innerHTML = popupstyles;
