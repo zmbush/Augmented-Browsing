@@ -28,32 +28,10 @@ function displayDefinition(text){
         method:     "GET",
         url:        url + text,
         onload:     function (response) {
-          hideDiv(currentDef);
-          div = document.getElementById('ZM-augmented-div');
-          div.innerHTML = response.responseText;
-
-          style = document.getElementById('zm-styles');
-          style.innerHTML = popupstyles;
-          currentDef += 1;
-
-          setTimeout(hideDiv, 10000, [currentDef]);
-          return;
-
-
-          responseXml = parseXml(response.responseText);
-          definitions = responseXml.getElementsByTagName("def");
-          body = "<b>" + text + "</b><br />";
-          display = false;
-          for(i = 0; i < definitions.length; i++){
-            display = true;
-            if(body != "")
-              body += "<br />";
-            body += (i+1) + ") " + definitions[i].childNodes[0].data;
-          }
-          if(display){
+          if(response.responseText != ""){
             hideDiv(currentDef);
             div = document.getElementById('ZM-augmented-div');
-            div.innerHTML = body;
+            div.innerHTML = response.responseText;
 
             style = document.getElementById('zm-styles');
             style.innerHTML = popupstyles;
