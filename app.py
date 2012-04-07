@@ -41,6 +41,10 @@ def getScript(name):
 def getCSS(name):
   return flask.send_file('stylesheets/' + name + '.css')
 
+@app.route('/version')
+def getVersion():
+  return '1'
+
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 5000))
   app.run(host='0.0.0.0', port=port)
