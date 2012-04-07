@@ -1,7 +1,7 @@
 // ==UserScript==
 // ==/UserScript==
 
-version = '2'
+version = {{ version }}
 
 var parseXml = function(xmlStr){
   return(new window.DOMParser() ).parseFromString(xmlStr, "text/xml");

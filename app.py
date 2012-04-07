@@ -2,12 +2,15 @@ import os
 import xml.dom.minidom
 import urllib
 import json
+import StringIO
 
 import flask
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, template_folder='plugin')
 app.debug = True
 flask.use_debugger = True
+
+ver = '2'
 
 @app.route('/info/<word>')
 def define(word):
@@ -35,7 +38,10 @@ def root():
 
 @app.route('/<name>.user.js')
 def getScript(name):
-  return flask.send_file('plugin/' + name + '.user.js')
+  strIO = StringIO.StringIO()
+  strIO.write(flask.render_template(name + '.user.js'))
+  strIO.seek(0)
+  return flask.send_file(strIO, attachment_filename=name + '.user.js')
 
 @app.route('/<name>.css')
 def getCSS(name):
@@ -43,8 +49,13 @@ def getCSS(name):
 
 @app.route('/version')
 def getVersion():
-  return '2'
+  return ver
 
+@app.context_processor
+def inject_version():
+  return dict(version=ver)
+
+# flask.render_template();
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 5000))
   app.run(host='0.0.0.0', port=port)
