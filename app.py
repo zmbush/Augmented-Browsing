@@ -29,6 +29,14 @@ def define(word):
   else:
     return ""
  
+@app.route('/')
+def root():
+  return '<a href="define.user.js">Install Script</a>'
+
+@app.route('/<name>.user.js')
+def getScript(name):
+  return flask.send_file('plugin/' + name + '.user.js')
+
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 5000))
   app.run(host='0.0.0.0', port=port)
