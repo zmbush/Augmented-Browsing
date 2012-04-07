@@ -37,6 +37,10 @@ def root():
 def getScript(name):
   return flask.send_file('plugin/' + name + '.user.js')
 
+@app.route('/<name>.css')
+def getCSS(name):
+  return flask.send_file('stylesheets/' + name + '.css')
+
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 5000))
   app.run(host='0.0.0.0', port=port)
