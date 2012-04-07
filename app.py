@@ -4,7 +4,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/def/<word>')
+@app.route('/info/<word>')
 def define(word):
   return word
  
