@@ -1,7 +1,7 @@
 // ==UserScript==
 // ==/UserScript==
 
-version = 1
+version = '1'
 
 var parseXml = function(xmlStr){
   return(new window.DOMParser() ).parseFromString(xmlStr, "text/xml");
@@ -27,15 +27,7 @@ function displayDefinition(text){
         url:        url + text,
         onload:     function (response) {
           if(response.responseText != ""){
-            hideDiv(currentDef);
-            div = document.getElementById('ZM-augmented-div');
-            div.innerHTML = response.responseText;
-
-            style = document.getElementById('zm-styles');
-            style.innerHTML = popupstyles;
-            currentDef += 1;
-
-            setTimeout(hideDiv, 10000, [currentDef]);
+            showText(response.responseText);
           }
         }
   } );
@@ -51,6 +43,18 @@ function hideDiv(def){
   }
 }
 
+function showText(txt){
+  hideDiv(currentDef);
+  div = document.getElementById('ZM-augmented-div');
+  div.innerHTML = txt;
+
+  style = document.getElementById('zm-styles');
+  style.innerHTML = popupstyles;
+  currentDef += 1;
+
+  setTimeout(hideDiv, 10000, [currentDef]);
+}
+
 window.onmouseup = function(){
   if(window.getSelection() != ""){
     displayDefinition(window.getSelection())
@@ -63,5 +67,17 @@ GM_xmlhttpRequest({
   url: 'http://ab.zmbush.com/styles.css',
   onload: function(response){
     popupstyles = response.responseText;
+    GM_xmlhttpRequest({
+      method: 'GET',
+      url: 'http://ab.zmbush.com/version',
+      onload: function(response){
+        if(response.responseText != version){
+          showText("The define script has been updated.<br />" +               
+                   "Please download it again " +
+                   <a href=\"http://ab.zmbush.com/define.user.js\">here</a>)
+        }
+      }
+    });
   }
 });
+
