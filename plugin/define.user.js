@@ -1,6 +1,7 @@
 // ==UserScript==
 // ==/UserScript==
 
+version = 1
 
 var parseXml = function(xmlStr){
   return(new window.DOMParser() ).parseFromString(xmlStr, "text/xml");
@@ -19,9 +20,6 @@ head.appendChild(link);
 currentDef = 0;
 
 function displayDefinition(text){
-  //apikey = "ukxldjne16v5lt0vro3ncmjnlwzs8td3eborub6vi1"
-  apikey = ""
-  url = "http://api-pub.dictionary.com/v001?vid=" + apikey + "&type=define&q="
   url = "http://ab.zmbush.com/info/"
 
   GM_xmlhttpRequest ( {
@@ -62,7 +60,7 @@ window.onmouseup = function(){
 popupstyles = ""
 GM_xmlhttpRequest({
   method: "GET",
-  url: 'http://static.zmbush.com/augment/styles.css',
+  url: 'http://ab.zmbush.com/styles.css',
   onload: function(response){
     popupstyles = response.responseText;
   }
