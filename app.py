@@ -10,7 +10,7 @@ app = flask.Flask(__name__, template_folder='plugin')
 app.debug = True
 flask.use_debugger = True
 
-ver = '3'
+ver = '1'
 
 @app.route('/info/<word>')
 def define(word):
