@@ -19,13 +19,26 @@ head.appendChild(link);
 currentDef = 0;
 
 function displayDefinition(text){
-  apikey = "ukxldjne16v5lt0vro3ncmjnlwzs8td3eborub6vi1"
+  //apikey = "ukxldjne16v5lt0vro3ncmjnlwzs8td3eborub6vi1"
+  apikey = ""
   url = "http://api-pub.dictionary.com/v001?vid=" + apikey + "&type=define&q="
+  url = "http://ab.zmbush.com/info/"
 
   GM_xmlhttpRequest ( {
         method:     "GET",
         url:        url + text,
         onload:     function (response) {
+          hideDiv(currentDef);
+          div = document.getElementById('ZM-augmented-div');
+          div.innerHTML = response.responseText;
+
+          style = document.getElementById('zm-styles');
+          style.innerHTML = popupstyles;
+          currentDef += 1;
+
+          setTimeout(hideDiv, 10000, [currentDef]);
+          return;
+
 
           responseXml = parseXml(response.responseText);
           definitions = responseXml.getElementsByTagName("def");
