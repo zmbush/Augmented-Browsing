@@ -74,7 +74,7 @@ GM_xmlhttpRequest({
         if(response.responseText != version){
           showText("The define script has been updated.<br />" +               
                    "Please download it again " +
-                   <a href=\"http://ab.zmbush.com/define.user.js\">here</a>)
+                   "<a href=\"http://ab.zmbush.com/define.user.js\">here</a>")
         }
       }
     });
