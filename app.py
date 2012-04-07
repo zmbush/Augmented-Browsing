@@ -43,7 +43,7 @@ def getCSS(name):
 
 @app.route('/version')
 def getVersion():
-  return '1'
+  return '2'
 
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 5000))
