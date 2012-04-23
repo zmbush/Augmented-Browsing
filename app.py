@@ -39,9 +39,12 @@ def root():
 @app.route('/<name>.user.js')
 def getScript(name):
   strIO = StringIO.StringIO()
-  strIO.write(flask.render_template(name + '.user.js'))
+  text = str(flask.render_template(name + '.user.js', version=ver))
+  strIO.write(text)
   strIO.seek(0)
-  return flask.send_file(strIO, attachment_filename=name + '.user.js')
+  return flask.send_file(strIO, 
+                         attachment_filename=name + '.user.js',
+                         as_attachment=True)
 
 @app.route('/<name>.css')
 def getCSS(name):
@@ -51,11 +54,11 @@ def getCSS(name):
 def getVersion():
   return ver
 
-@app.context_processor
-def inject_version():
-  return dict(version=ver)
+# @app.context_processor
+# def inject_version():
+  # return dict(version=ver)
 
 # flask.render_template();
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 5000))
-  app.run(host='0.0.0.0', port=port)
+  app.run(host='0.0.0.0', port=port, debug=True)
