@@ -93,7 +93,7 @@ GM_xmlhttpRequest({
 });
 
 function main(){
-  $(document).html($(document).text().replace(/\b(\w+)\b/g, "<span id=\"zm-text\">$1</span>"));
+  // Run JQuery stuff here
 }
 
-addJquery(main);
+addJQuery(main);
