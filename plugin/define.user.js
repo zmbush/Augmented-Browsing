@@ -61,7 +61,7 @@ window.onmouseup = function(){
   }
 }
 
-function addJQuery(callback) {
+/*function addJQuery(callback) {
   var script = document.createElement("script");
   script.setAttribute("src", "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js");
   script.addEventListener('load', function() {
@@ -70,7 +70,7 @@ function addJQuery(callback) {
       document.body.appendChild(script);
       }, false);
   document.body.appendChild(script);
-}
+}*/
 
 popupstyles = ""
 GM_xmlhttpRequest({
@@ -92,8 +92,10 @@ GM_xmlhttpRequest({
   }
 });
 
+/*
 function main(){
   // Run JQuery stuff here
 }
 
 addJQuery(main);
+*/
