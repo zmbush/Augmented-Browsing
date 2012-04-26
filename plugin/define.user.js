@@ -26,8 +26,10 @@ function displayDefinition(text){
         method:     "GET",
         url:        url + text,
         onload:     function (response) {
-          if(response.responseText != ""){
-            showText(response.responseText);
+          if(response.status == 200){
+            if(response.responseText != ""){
+              showText(response.responseText);
+            }
           }
         }
   } );
