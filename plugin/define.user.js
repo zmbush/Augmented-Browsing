@@ -61,16 +61,18 @@ window.onmouseup = function(){
   }
 }
 
-/*function addJQuery(callback) {
+function addJQuery(callback) {
   var script = document.createElement("script");
-  script.setAttribute("src", "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js");
+  url = ("https:" == document.location.protocol) ? "https://" : "http://"
+  url += "ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+  script.setAttribute("src", url);
   script.addEventListener('load', function() {
       var script = document.createElement("script");
       script.textContent = "(" + callback.toString() + ")();";
       document.body.appendChild(script);
       }, false);
   document.body.appendChild(script);
-}*/
+}
 
 popupstyles = ""
 GM_xmlhttpRequest({
@@ -92,10 +94,8 @@ GM_xmlhttpRequest({
   }
 });
 
-/*
 function main(){
   // Run JQuery stuff here
 }
 
 addJQuery(main);
-*/
