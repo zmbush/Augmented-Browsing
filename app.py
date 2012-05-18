@@ -60,7 +60,7 @@ def getVersion():
 def rankPage(page):
   url = page.replace("_", "/")
   text = urllib.urlopen(url).read()
-  soup = bs4.BeautifulSoup(text)
+  soup = bs4.BeautifulSoup(text, "lxml")
   return soup.prettify()
 
 # @app.context_processor
