@@ -3,6 +3,7 @@ import xml.dom.minidom
 import urllib
 import json
 import StringIO
+import bs4
 
 import flask
 
@@ -57,7 +58,10 @@ def getVersion():
 
 @app.route('/rankPage/<page>')
 def rankPage(page):
-  return 'ass'
+  url = page.replace("_", "/")
+  text = urllib.urlopen(url).read()
+  soup = bs4.BeautifulSoup(text)
+  return soup.prettify()
 
 # @app.context_processor
 # def inject_version():
