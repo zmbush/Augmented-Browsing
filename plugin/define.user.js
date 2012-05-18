@@ -63,6 +63,7 @@ window.onmouseup = function(){
   }
 }
 
+/*
 function addJQuery(callback) {
   var script = document.createElement("script");
   url = ("https:" == document.location.protocol) ? "https://" : "http://"
@@ -74,9 +75,17 @@ function addJQuery(callback) {
       document.body.appendChild(script);
       }, false);
   document.body.appendChild(script);
-}
+}*/
 
 popupstyles = ""
+GM_xmlhttpRequest({
+  method: "GET",
+  url: "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+  onload: function(response){
+    alert(response.responseText)
+    //eval(response.responseText)
+  }
+}
 GM_xmlhttpRequest({
   method: "GET",
   url: 'http://ab.zmbush.com/styles.css',
@@ -96,8 +105,8 @@ GM_xmlhttpRequest({
   }
 });
 
-function main(){
+/*function main(){
   // Run JQuery stuff here
 }
 
-addJQuery(main);
+addJQuery(main);*/
