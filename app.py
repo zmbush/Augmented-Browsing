@@ -61,7 +61,8 @@ def rankPage(page):
   url = page.replace("_", "/")
   text = urllib.urlopen(url).read()
   soup = bs4.BeautifulSoup(text, "lxml")
-  return soup.prettify()
+  return str(soup.find_all("p"))
+  # return soup.prettify()
 
 # @app.context_processor
 # def inject_version():
