@@ -34,7 +34,8 @@ def define(word):
  
 @app.route('/')
 def root():
-  return '<a href="define.user.js">Install Script</a>'
+  return '<a href="define.user.js">Install Script</a>' + \
+          '<br /><a href="rank.user.js">Install Script</a>'
 
 @app.route('/<name>.user.js')
 def getScript(name):
@@ -53,6 +54,10 @@ def getCSS(name):
 @app.route('/version')
 def getVersion():
   return ver
+
+@app.route('/rankPage/<page>')
+def rankPage(page):
+  return 'ass'
 
 # @app.context_processor
 # def inject_version():
