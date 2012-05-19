@@ -1,0 +1,6 @@
+// ==UserScript==
+// ==/UserScript==
+
+version = {{ version }}
+
+
