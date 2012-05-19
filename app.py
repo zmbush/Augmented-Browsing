@@ -35,8 +35,9 @@ def define(word):
  
 @app.route('/')
 def root():
-  return '<a href="define.user.js">Install Script</a>' + \
-          '<br /><a href="rank.user.js">Install Script</a>'
+  return '<a href="define.user.js">Install Define Script</a>' + \
+          '<br /><a href="rank.user.js">Install Rank Script</a>' + \
+          '<br /><a href="linkFix.user.js">Install Link Fixer Script</a>'
 
 @app.route('/<name>.user.js')
 def getScript(name):
