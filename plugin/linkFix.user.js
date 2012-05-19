@@ -25,7 +25,5 @@ document.onmouseup = function(e){
     if(current.href.search("redirect_uri") != -1){
       url = unescape(getUrlParameter(current.href, "redirect_uri"))
       document.location = url
-    }else{
-      document.location = current.href
     }
 }
