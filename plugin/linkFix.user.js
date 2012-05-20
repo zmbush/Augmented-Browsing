@@ -2,6 +2,8 @@
 // ==/UserScript==
 
 version = {{ version }}
+targetDomain = "https://www.facebook.com"
+lengthOfTargetDomain = targetDomain.length()
 
 function getUrlParameter(url, parameter){
   params = url.split("?")[1]
@@ -15,7 +17,7 @@ function getUrlParameter(url, parameter){
   return ""
 }
 
-document.onmouseup = function(e){ 
+function replacementOnmouseup(e){ 
   target = document.elementFromPoint(e.clientX, e.clientY)
   current = target
   while(current != document && current.nodeName != "A"){
@@ -27,3 +29,6 @@ document.onmouseup = function(e){
       document.location = url
     }
 }
+
+if(document.URL.substring(0,lengthOfTargetDomain) == targetDomain)
+  document.onmouseup = replacementOnmouseup 
